@@ -1,0 +1,45 @@
+curl --data '{"method":"eth_getBalance","params":["0xb9515e8dba64827c96bb7e324374ed4e24878dc1"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"eth_sendTransaction","params": [{
+  "from": "0xb9515e8dba64827c96bb7e324374ed4e24878dc1",
+  "to": "0x226b59B07E61E8a3F235Ab3AF36F4150d804D04a", //MYETHERWALLET
+  "gas": "0x76c0", // 30400
+  "gasPrice": "0x9184e72a000", // 10000000000000
+  "value": "0x39696F338A940",
+  //"data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+}],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"personal_newAccount","params":["jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"personal_unlockAccount","params":["0xb9515e8dba64827c96bb7e324374ed4e24878dc1",null,null],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+
+curl --data '{"method":"personal_sendTransaction","params": [{ "from": "0xb9515e8dba64827c96bb7e324374ed4e24878dc1", "to": "0x226b59B07E61E8a3F235Ab3AF36F4150d804D04a", "value": "0x39696F338A940" }, "null"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"personal_sendTransaction","params": [{
+  "from": "0xb9515e8dba64827c96bb7e324374ed4e24878dc1",
+  "to": "0x226b59B07E61E8a3F235Ab3AF36F4150d804D04a", //MYETHERWALLET
+  "gas": "0x76c0", // 30400 --21000 is better
+  "gasPrice": "0x9184e72a000", // 10000000000000
+  "value": "0x39696F338A940",
+  //"data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+}],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+
+Acc 2: 0x511280f536027779bf273c70cec871c7657796ca
+curl --data '{"method":"personal_sendTransaction","params": [{ "from": "0x511280f536027779bf273c70cec871c7657796ca", "to": "0x587b9057cee40f32de7ba9b0c39d297936b3dc73", "gas": "0x8CA0", "value": "0x221B262DD8000" }, "jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"parity_changePassword","params":["0xb9515e8dba64827c96bb7e324374ed4e24878dc1","","jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0xa0550160ac199775d0578e4c8e3733a6940c2f99ec0ce60083715cbc67f8f316"],"id":1}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"trace_filter","params":[{"fromBlock":"0x0","fromAddress":["0x511280f536027779bf273c70cec871c7657796ca"]}],"id":74}' localhost:8545
+
+
+curl --data '{"method":"trace_filter","params":[{"fromBlock":"0x2ed0c4","toBlock":"0x0","toAddress":["0x511280f536027779bf273c70cec871c7657796ca"]}],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"trace_filter","params":[{"fromAddress":["0xa7c8be124cc0d8fd663a7841cfe0183dec8bf677"],"fromBlock":"0x59A10F","toBlock":"0x59A10F"}],"id":1}' http://localhost:8545
+
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' -H "Content-Type: application/json" localhost:8545
+
