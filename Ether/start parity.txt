@@ -1,0 +1,1 @@
+./parity --jsonrpc-apis "web3,eth,personal,parity_accounts,traces" --tracing on --db-compaction ssd --cache-size 6000
