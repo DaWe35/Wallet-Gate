@@ -1,4 +1,5 @@
 curl --data '{"method":"eth_getBalance","params":["0x412b5ca1d5e2acbc5454130c31594dc00cc192ee"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+curl --data '{"method":"eth_getBalance","params":["0x37cf68f1644d41dc22c393bd019b2ca75260b1d7","0x412b5ca1d5e2acbc5454130c31594dc00cc192ee","0xf4d9ac9b0363e0ef8a8b78f16fc35a0da044c0c9"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
 curl --data '{"method":"eth_sendTransaction","params": [{
   "from": "0xb9515e8dba64827c96bb7e324374ed4e24878dc1",
@@ -36,10 +37,12 @@ curl --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0xa
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"trace_filter","params":[{"fromBlock":"0x0","fromAddress":["0x511280f536027779bf273c70cec871c7657796ca"]}],"id":74}' localhost:8545
 
 
-curl --data '{"method":"trace_filter","params":[{"fromBlock":"0x2ed0c4","toBlock":"0x0","toAddress":["0x511280f536027779bf273c70cec871c7657796ca"]}],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"trace_filter","params":[{"fromAddress":["0xa7c8be124cc0d8fd663a7841cfe0183dec8bf677"],"fromBlock":"0x59A10F","toBlock":"0x59A10F"}],"id":1}' http://localhost:8545
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' -H "Content-Type: application/json" localhost:8545
 
+curl --data '{"method":"trace_filter","params":[{"fromBlock":"0x699ECD","toBlock":"0xFFFFFFFF","toAddress":["0x37cf68f1644d41dc22c393bd019b2ca75260b1d7","0x412b5ca1d5e2acbc5454130c31594dc00cc192ee","0xf4d9ac9b0363e0ef8a8b78f16fc35a0da044c0c9"]}],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"personal_listAccounts","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
