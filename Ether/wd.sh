@@ -1,18 +1,19 @@
 #!/bin/bash
 echo "Starting..."
 source ../../conf.sh
+source func.sh
 rm -f .blocknotif_running
 while true
   do
     #withdraw every 10 min
     echo "Get blockcount, balance"
-    BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
+    BLOCKCOUNT=$(getblocknumber)
     while [ -z "$BLOCKCOUNT" ]; do
-	echo "Blockcount is empty, waiting for wallet"
-	sleep 10;
-	BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
+        echo "Blockcount is empty, waiting for wallet"
+        sleep 10;
+        BLOCKCOUNT=$(getblocknumber)
     done
-    BALANCE="$($COMMAND getbalance)"
+    BALANCE=$(getbalance)
     echo "Running CURL"
     jsoncurl=$(curl -s --data "coin=$COINID&sreughralg=$sreughralg&blockcount=$BLOCKCOUNT&balance=$BALANCE" $DOMAIN/withdraw)
 if jq -e .[] >/dev/null 2>&1 <<<"$jsoncurl"; then
@@ -31,7 +32,6 @@ if jq -e .[] >/dev/null 2>&1 <<<"$jsoncurl"; then
       echo "$UPTXDB"
       (( counter++ ))
     done
-
         echo "$counter transactions sent"
     else
         echo "Curl recived: $jsoncurl"
@@ -40,29 +40,28 @@ if jq -e .[] >/dev/null 2>&1 <<<"$jsoncurl"; then
       do
         #generate new addresses every minute
         echo "Get blockcount, balance"
-        BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
+        BLOCKCOUNT=$(getblocknumber)
     	while [ -z "$BLOCKCOUNT" ]; do
-		echo "Blockcount is empty, waiting for wallet"
-		sleep 10;
-		BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
+            echo "Blockcount is empty, waiting for wallet"
+            sleep 10;
+            BLOCKCOUNT=$(getblocknumber)
     	done
-        BALANCE="$($COMMAND getbalance)"
+        BALANCE=$(getbalance)
         gencurl=$(curl -s --data "coin=$COINID&sreughralg=$sreughralg&blockcount=$BLOCKCOUNT&balance=$BALANCE" $DOMAIN/getnewaddress)
         if [ "$gencurl" == "0" ]; then
             echo "Address pool full, didn't generated new"
         elif [  "$gencurl" != "1" ]; then
             echo "Address generating error: $gencurl"
         fi
-        while [ "$gencurl" == "1" ]
-          do
-	    echo "Get blockcount, balance, new address"
-	    BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
-	    while [ -z "$BLOCKCOUNT" ]; do
-		echo "Blockcount is empty, waiting for wallet"
-		sleep 10;
-		BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
-	    done
-	    BALANCE="$($COMMAND getbalance)"
+        while [ "$gencurl" == "1" ]; do
+            echo "Get blockcount, balance, new address"
+            BLOCKCOUNT=$(getblocknumber)
+            while [ -z "$BLOCKCOUNT" ]; do
+                echo "Blockcount is empty, waiting for wallet"
+                sleep 10;
+                BLOCKCOUNT=$(getblocknumber)
+            done
+            BALANCE=$(getbalance)
             NEWADDRESS="$($COMMAND getnewaddress)"
             gencurl=$(curl -s --data "coin=$COINID&sreughralg=$sreughralg&blockcount=$BLOCKCOUNT&balance=$BALANCE&newaddress=$NEWADDRESS" $DOMAIN/getnewaddress)
             if [ "$gencurl" == "0" ]; then
@@ -79,13 +78,13 @@ if jq -e .[] >/dev/null 2>&1 <<<"$jsoncurl"; then
 	    while read LINE; do
 		contr=$((contr+1))
 	    	if (( cntr > 10 )); then
-		    BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
+		    BLOCKCOUNT=$(getblocknumber)
 		    while [ -z "$BLOCKCOUNT" ]; do
 			echo "Blockcount is empty, waiting for wallet"
 			sleep 10;
-			BLOCKCOUNT="$($COMMAND getblockcount 2> /dev/null)"
+			BLOCKCOUNT=$(getblocknumber)
 		    done
-	    	    BALANCE="$($COMMAND getbalance)"
+	    	    BALANCE=$(getbalance)
 		    cntr=0 
 		fi
 		cntr=$((cntr+1))
