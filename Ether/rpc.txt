@@ -1,4 +1,6 @@
-curl --data '{"method":"eth_getBalance","params":["0x412b5ca1d5e2acbc5454130c31594dc00cc192ee"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+CHANGE PASSPHRASE
+
+curl --data '{"method":"eth_getBalance","params":["0x9de7e5d5066b2b06beebbf9e379e9d0a6a232041"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 curl --data '{"method":"eth_getBalance","params":["0x37cf68f1644d41dc22c393bd019b2ca75260b1d7","0x412b5ca1d5e2acbc5454130c31594dc00cc192ee","0xf4d9ac9b0363e0ef8a8b78f16fc35a0da044c0c9"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
 curl --data '{"method":"eth_sendTransaction","params": [{
@@ -15,8 +17,6 @@ curl --data '{"method":"personal_newAccount","params":["jg9hfgp89azfghsfhzugh8aq
 curl --data '{"method":"personal_unlockAccount","params":["0xf4d9ac9b0363e0ef8a8b78f16fc35a0da044c0c9",null,null],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
 
-curl --data '{"method":"personal_sendTransaction","params": [{ "from": "0x412b5ca1d5e2acbc5454130c31594dc00cc192ee", "to": "0x587b9057cee40f32de7ba9b0c39d297936b3dc73", "value": "0x39696F338A940" }, "jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
-
 curl --data '{"method":"personal_sendTransaction","params": [{
   "from": "0x412b5ca1d5e2acbc5454130c31594dc00cc192ee",
   "to": "0x587b9057cee40f32de7ba9b0c39d297936b3dc73", //Bitstamp
@@ -28,14 +28,14 @@ curl --data '{"method":"personal_sendTransaction","params": [{
 
 
 Acc 2: 0x511280f536027779bf273c70cec871c7657796ca
-curl --data '{"method":"personal_sendTransaction","params": [{ "from": "0x511280f536027779bf273c70cec871c7657796ca", "to": "0x587b9057cee40f32de7ba9b0c39d297936b3dc73", "gas": "0x8CA0", "value": "0x221B262DD8000" }, "jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+Test chain: 0x0cca2daa72cbea3af0cd071a50a15c7a945dd536
+Kovan: 0x9de7e5d5066b2b06beebbf9e379e9d0a6a232041
+
+curl --data '{"method":"personal_sendTransaction","params": [{ "from": "0x9de7e5d5066b2b06beebbf9e379e9d0a6a232041", "to": "0x34A6E41B8B23853a4A44e0e9D49D13BE6FFb33Cf", "gas": "0xBB80", "value": "0xDE08B0BC8710000", "nonce": "0x0" }, "jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
 curl --data '{"method":"parity_changePassword","params":["0xf4d9ac9b0363e0ef8a8b78f16fc35a0da044c0c9","","jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
-curl --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0xa0550160ac199775d0578e4c8e3733a6940c2f99ec0ce60083715cbc67f8f316"],"id":1}' -H "Content-Type: application/json" -X POST localhost:8545
-
-curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"trace_filter","params":[{"fromBlock":"0x0","fromAddress":["0x511280f536027779bf273c70cec871c7657796ca"]}],"id":74}' localhost:8545
-
+curl --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0xe2dee6abb397d719332b0ba6f201f5722b16626e4e8eb9bd13ae42be5f52df0e"],"id":1}' -H "Content-Type: application/json" -X POST localhost:8545
 
 
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"trace_filter","params":[{"fromAddress":["0xa7c8be124cc0d8fd663a7841cfe0183dec8bf677"],"fromBlock":"0x59A10F","toBlock":"0x59A10F"}],"id":1}' http://localhost:8545
@@ -46,3 +46,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id
 curl --data '{"method":"trace_filter","params":[{"fromBlock":"0x699ECD","toBlock":"0xFFFFFFFF","toAddress":["0x37cf68f1644d41dc22c393bd019b2ca75260b1d7","0x412b5ca1d5e2acbc5454130c31594dc00cc192ee","0xf4d9ac9b0363e0ef8a8b78f16fc35a0da044c0c9"]}],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 
 curl --data '{"method":"personal_listAccounts","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"parity_localTransactions","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+
+curl --data '{"method":"parity_pendingTransactions","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545

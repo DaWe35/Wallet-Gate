@@ -27,7 +27,8 @@ if jq -e .[] >/dev/null 2>&1 <<<"$jsoncurl"; then
       JSONADDRESS="$(_jq '.address')"
       JSONID="$(_jq '.id')"
       echo "Sending $JSONAMOUNT coin to $JSONADDRESS (id: $JSONID)";
-      TXID=$($COMMAND sendtoaddress $JSONADDRESS $JSONAMOUNT)
+      //TXID=$($COMMAND sendtoaddress $JSONADDRESS $JSONAMOUNT)
+      TXID=$(curl --data '{"method":"personal_sendTransaction","params": [{ "from": "$FROM", "to": "$JSONADDRESS", "gas": "0x8CA0", "value": "0x221B262DD8000" }, "jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545)
       UPTXDB=$(curl -s --data "coin=$COINID&sreughralg=$sreughralg&txid=$TXID&id=$JSONID" $DOMAIN/txid)
       echo "$UPTXDB"
       (( counter++ ))
@@ -62,7 +63,8 @@ if jq -e .[] >/dev/null 2>&1 <<<"$jsoncurl"; then
                 BLOCKCOUNT=$(getblocknumber)
             done
             BALANCE=$(getbalance)
-            NEWADDRESS="$($COMMAND getnewaddress)"
+            NEWADDRESS=$(curl --data '{"method":"personal_newAccount","params":["jg9hfgp89azfghsfhzugh8aq"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545)
+            NEWADDRESS=$(echo "$NEWADDRESS" | jq '.result')
             gencurl=$(curl -s --data "coin=$COINID&sreughralg=$sreughralg&blockcount=$BLOCKCOUNT&balance=$BALANCE&newaddress=$NEWADDRESS" $DOMAIN/getnewaddress)
             if [ "$gencurl" == "0" ]; then
                 echo "Address pool full, didn't generated new"
