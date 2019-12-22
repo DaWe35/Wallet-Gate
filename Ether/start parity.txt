@@ -1,1 +1,0 @@
-./parity-2.1.11 --jsonrpc-apis "eth,personal,parity_accounts,traces,parity" --tracing on --db-compaction ssd --cache-size 12000 --min-peers 5 --max-peers 200 --chain kovan
