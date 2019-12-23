@@ -2,6 +2,8 @@
 
 Wallet gate uniformizes the JSON-RPC calls of the crypto nodes. Useful for wallets and exchanges.
 
+![Wallet Gate description sketch](https://raw.githubusercontent.com/DaWe35/Wallet-Gate/master/assets/sketch.jpg)
+
 ## Features
 
 - Address generation
