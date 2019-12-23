@@ -1,6 +1,11 @@
-# Wallet gate
+```diff
+- Note that Wallet Gate has not released yet!
+- The script is under construction, stay tuned!
+```
 
-Wallet gate uniformizes the JSON-RPC calls of the crypto nodes. Useful for wallets and exchanges.
+# Wallet Gate
+
+Wallet Gate uniformizes node calls for wallets and exchanges. It's a useful middleware for services, who need to communicate a lot with full nodes.
 
 ![Wallet Gate description sketch](https://raw.githubusercontent.com/DaWe35/Wallet-Gate/master/assets/sketch.jpg)
 
