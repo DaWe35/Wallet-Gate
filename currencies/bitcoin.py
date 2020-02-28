@@ -2,23 +2,23 @@ from currencies.__interface__ import nodeInterface
 from model.rpc import RPC
 
 class Node(nodeInterface):
-    
+
     def __init__(self):
         #test node
         if int(self.blockcount()) < 1:
             raise Exception('Could not talk to node')
 
     def blockcount(self):
-        return 12
+        return RPC.post('getblockcount')
 
     def balance(self):
-        return 284
+        return RPC.post('getbalance')
 
-    def transaction(self):
-        return 'gettransaction'
+    def transaction(self, txid):
+        return RPC.post('gettransaction', [txid])
 
     def newaddress(self):
-        return '1testaddress'
+        return RPC.post('getnewaddress')
         
-    def sendto(self):
-        return 'txid'
+    def sendto(self, address, amount):
+        return RPC.post('sendtoaddress', [address, amount])

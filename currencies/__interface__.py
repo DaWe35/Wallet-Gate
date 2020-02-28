@@ -7,19 +7,19 @@ class nodeInterface(ABC):
         pass
 
     @abstractmethod
-    def getbalance(self):
+    def balance(self):
         pass
 
     @abstractmethod
-    def getblockcount(self):
+    def blockcount(self):
         pass
 
     @abstractmethod
-    def gettransaction(self):
+    def transaction(self):
         pass
 
     @abstractmethod
-    def getnewaddress(self):
+    def newaddress(self):
         pass
         
     @abstractmethod
