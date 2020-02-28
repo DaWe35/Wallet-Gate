@@ -1,4 +1,7 @@
 ```diff
+! ALWAYS use multisig COLD-WALLET to store the coins! Hot-wallets are vulnerable!!!
+# Cold-wallet support will be added later
+
 - Note that Wallet Gate has not released yet!
 - The script is under construction, stay tuned!
 ```
