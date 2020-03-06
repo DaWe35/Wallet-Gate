@@ -6,7 +6,7 @@ package = 'currencies.' + config.NODE
 Node = getattr(__import__(package, fromlist=['Node']), 'Node')
 
 package = 'protocols.' + config.PROTOCOL + '.rest'
-Node = getattr(__import__(package, fromlist=['Protocol']), 'Protocol')
+Protocol = getattr(__import__(package, fromlist=['Protocol']), 'Protocol')
 
 node = Node()
 protocol = Protocol()
@@ -16,7 +16,6 @@ walletnotify_lastcheck = 0
 
 lastblockhash_txt = Filedb('lastblockhash')
 lastblockhash_lastcheck = 0
-
 
 # withdraw & generate new addresses every 10 min
 def send_gen():
@@ -34,9 +33,11 @@ def send_gen():
 schedule.every(1).minute.do(send_gen)
 
 while True:
+    # if new block found
     if lastblockhash_txt.lastModify() > lastblockhash_lastcheck:
         fetch from exchane
         update required tx
+    # if new transaction found
     if walletnotify_txt.lastModify() > walletnotify_lastcheck:
         send new tx
 
