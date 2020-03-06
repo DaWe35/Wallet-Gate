@@ -1,1 +1,3 @@
 /config.py
+/filedb/lastblockhash.txt
+/filedb/walletnotify.txt
